@@ -1,7 +1,7 @@
 # StagDet
 
 This program checks that the determinant of the staggered Dirac operator is
-invariant under translations and rotations on a 2D square lattice with U(1) a
+invariant under translations and rotations on a 2D square lattice with a U(1)
 gauge field and periodic boundary conditions.
 
 First it generates a random gauge field configuration (base case), then it
@@ -15,9 +15,9 @@ few different ways:
 - xflip: reflect in the x-direction (about y=N/2)
 - yflip: reflect in the y-direction (about x=N/2)
 - xyswap: swaps the x and y indices
-- r90: rotates by 90 degrees
-- r180: rotates by 180 degrees
-- r270: rotates by 270 degrees
+- r90: rotate CCW by 90 degrees
+- r180: rotate CCW by 180 degrees
+- r270: rotate CCW by 270 degrees
 
 Next, it computes the average plaquette for each configuration. This is done to
 check that the transformation was applied correctly. Finally, it uses the
