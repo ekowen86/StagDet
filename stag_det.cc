@@ -9,7 +9,10 @@
 #include <complex>
 #include <vector>
 #include <random>
+#include <chrono>
 #include <Eigen/Sparse>
+
+#define NDEBUG  // skip bounds checking to speed up Eigen
 
 typedef std::complex<double> Complex;
 typedef std::vector<Complex> Field;
@@ -111,7 +114,15 @@ int main(int argc, char* argv[]) {
 
   // calculate abs log det of dirac operator
   printf("\ncalculating log(det D)...\n");
-  printf("%.15f (base case)\n", CalcLogDet(field1, field2));
+  {
+    using namespace std::chrono;
+    auto start_time = high_resolution_clock::now();
+    printf("%.15f (base case)\n", CalcLogDet(field1, field2));
+    auto end_time = high_resolution_clock::now();
+    auto time_span = duration_cast<duration<double>>(end_time - start_time);
+    printf("time: %.12fs\n", time_span.count());
+  }
+
   printf("%.15f (x+1)\n", CalcLogDet(field1_x1, field2_x1));
   printf("%.15f (x+2)\n", CalcLogDet(field1_x2, field2_x2));
   printf("%.15f (y+1)\n", CalcLogDet(field1_y1, field2_y1));

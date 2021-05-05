@@ -64,3 +64,18 @@ Note that with staggered fermions the determinant is not invariant if N is odd.
     -377.426047102156076 (r90)
     -377.426047102157725 (r180)
     -377.426047102155678 (r270)
+
+## Python Version
+
+There is also a python version of this program to compare the performance of
+scipy.sparse.linalg.splu with the Eigen SparseLU solver. It doesn't check any
+of the transformation though, it only calculates log(det D) for the base case.
+Command line usage:
+
+    python stag_det.py N m
+    N: lattice size
+    m: fermion mass
+
+On my laptop, the python version runs faster than the C++ version when N is
+larger than about 100. For smaller lattice sizes, the performance is about
+the same.
