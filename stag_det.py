@@ -6,10 +6,16 @@ import numpy as np
 from scipy.sparse import csc_matrix
 from scipy.sparse.linalg import splu
 
-N = int(sys.argv[1]) # lattice size
-print("N: %d" % (N))
+# default parameters
+N = 64
+m = 0.5
 
-m = float(sys.argv[2]) # fermion mass
+# get parameters from command line if provided
+if len(sys.argv) == 3:
+	N = int(sys.argv[1]) # lattice size
+	m = float(sys.argv[2]) # fermion mass
+
+print("N: %d" % (N))
 print("m: %.3f" % (m))
 
 # generate a random configuration
