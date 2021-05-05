@@ -24,7 +24,7 @@ col = []
 data = []
 for i in range(0, len(field1)):
 	x = i % N
-	y = i / N
+	y = int(i / N)
 
 	xp1 = (x + 1) % N
 	xm1 = (x - 1 + N) % N
