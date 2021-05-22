@@ -62,6 +62,8 @@ for i in range(0, len(field1)):
 	c_ym1 = -0.5 * np.conj(field2[i_ym1])
 	if (x & 1 != 0):
 		c_ym1 *= -1.0;  # eta factor
+	if (y == 0):
+		c_ym1 *= -1.0;  # antiperiodic boundary conditions in y direction
 	row.append(i)
 	col.append(i_ym1)
 	data.append(c_ym1)
@@ -80,5 +82,5 @@ logdet = np.log(diagL).sum() + np.log(diagU).sum()
 
 end_time = time.time()
 
-print("logdet: %.15f" % np.real(logdet))
+print("logdet: %.12f + %.12f * i * pi" % (np.real(logdet), np.imag(logdet) / np.pi))
 print("time: %.12fs" % (end_time - start_time))
