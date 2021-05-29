@@ -1,4 +1,4 @@
-# stag_det.py
+# stag_det_su2.py
 
 import sys
 import time
@@ -65,7 +65,7 @@ for i in range(0, V):
 		r = r // N
 	
 	for mu in range(0, d):
-		# get forward and backward site indices
+		# get forward and backward site positions
 		xp1 = x.copy()
 		xp1[mu] = (xp1[mu] + 1) % N
 		xm1 = x.copy()
