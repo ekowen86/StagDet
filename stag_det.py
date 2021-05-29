@@ -22,8 +22,6 @@ print("m: %.3f" % (m))
 field1 = np.exp(2j * np.pi * np.random.rand(N * N))
 field2 = np.exp(2j * np.pi * np.random.rand(N * N))
 
-start_time = time.time()
-
 # generate the nonzero elements of the staggered Dirac operator
 row = []
 col = []
@@ -54,16 +52,16 @@ for i in range(0, len(field1)):
 
 	c_yp1 = 0.5 * field2[i]
 	if (x & 1 != 0):
-		c_yp1 *= -1.0;  # eta factor
+		c_yp1 *= -1.0  # eta factor
 	row.append(i)
 	col.append(i_yp1)
 	data.append(c_yp1)
 
 	c_ym1 = -0.5 * np.conj(field2[i_ym1])
 	if (x & 1 != 0):
-		c_ym1 *= -1.0;  # eta factor
+		c_ym1 *= -1.0  # eta factor
 	if (y == 0):
-		c_ym1 *= -1.0;  # antiperiodic boundary conditions in y direction
+		c_ym1 *= -1.0  # antiperiodic boundary conditions in y direction
 	row.append(i)
 	col.append(i_ym1)
 	data.append(c_ym1)
@@ -73,12 +71,13 @@ for i in range(0, len(field1)):
 	col.append(i)
 	data.append(m)
 
+start_time = time.time()
+
 # create a sparse matrix and find the log determinant
 D = csc_matrix((data, (row, col)), dtype=np.complex128)
 LU = splu(D)
-diagL = LU.L.diagonal().astype(np.complex128)
 diagU = LU.U.diagonal().astype(np.complex128)
-logdet = np.log(diagL).sum() + np.log(diagU).sum()
+logdet = np.log(diagU).sum()  # det(L) = 1 by construction
 
 end_time = time.time()
 

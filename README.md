@@ -81,3 +81,30 @@ larger than about 100. For smaller lattice sizes, the performance is about
 the same.
 
 The python version uses antiperiodic boundary conditions in the y direction.
+
+## Python Version with SU(2)
+
+To test how scipy.sparse.linalg.splu scales with a larger gauge group and
+more dimensions, there is an SU(2) implementation that computes log(det D)
+in any number of dimensions. The degree of the Dirac operator is
+N<sub>c</sub> * V, where N<sub>c</sub> is 2 for SU(2) and V = N<sup>d</sup> is
+the lattice volume. Command line usage:
+
+    python stag_det_su2_.py N m d
+    N: lattice size
+    m: fermion mass
+    d: number of dimensions
+
+For d=2, calculating log(det D) scales as roughly V<sup>1.5</sup>, which is
+what we would expect for a sparse matrix.
+
+For d=4 this implementation very quickly starts scaling as V<sup>3</sup>, which
+is what we would expect for a dense matrix. So it seems that adding color
+indices and more dimensions makes the operator dense enough to nullify the
+benefits of using a sparse algorithm. For reference, a 12^4 lattice took about
+30 minutes on my laptop.
+
+The code also includes a couple of commented out lines that calculate
+log(det D) using the dense implementation numpy.linalg.eig. As expected, the
+dense implementaion scales as O(V<sup>3</sup>) even for relatively small
+lattice sizes.
