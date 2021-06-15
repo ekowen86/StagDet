@@ -90,7 +90,7 @@ in any number of dimensions. The degree of the Dirac operator is
 N<sub>c</sub> * V, where N<sub>c</sub> is 2 for SU(2) and V = N<sup>d</sup> is
 the lattice volume. Command line usage:
 
-    python stag_det_su2_.py N m d
+    python stag_det_su2.py N m d
     N: lattice size
     m: fermion mass
     d: number of dimensions
