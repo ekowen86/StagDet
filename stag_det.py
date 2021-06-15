@@ -79,6 +79,14 @@ LU = splu(D)
 diagU = LU.U.diagonal().astype(np.complex128)
 logdet = np.log(diagU).sum()  # det(L) = 1 by construction
 
+# measure chiral condensate (not sure if this is right)
+src0 = np.zeros(N * N)
+src1 = np.zeros(N * N)
+src0[0] = 1.0
+src1[1] = 1.0
+cc = np.real(LU.solve(src0)[0] + LU.solve(src1)[1])
+print("chiral cond.: %.12f" % cc)
+
 end_time = time.time()
 
 print("logdet: %.12f + %.12f * i * pi" % (np.real(logdet), np.imag(logdet) / np.pi))
