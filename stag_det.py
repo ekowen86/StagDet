@@ -53,6 +53,8 @@ for i in range(0, len(field1)):
 	c_yp1 = 0.5 * field2[i]
 	if (x & 1 != 0):
 		c_yp1 *= -1.0  # eta factor
+	if (yp1 == 0):
+		c_yp1 *= -1.0  # antiperiodic boundary conditions in y direction
 	row.append(i)
 	col.append(i_yp1)
 	data.append(c_yp1)

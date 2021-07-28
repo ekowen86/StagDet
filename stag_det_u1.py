@@ -74,6 +74,9 @@ for i in range(0, V):
 
 		# U term
 		c_xp1 = 0.5 * eta * field[mu,i]
+		if (mu == (d - 1) and xp1[mu] == 0):
+			# antiperiodic boundary conditions in t direction
+			c_xp1 *= -1.0
 		append_element(i, i_xp1, c_xp1)
 
 		# U^dagger term
